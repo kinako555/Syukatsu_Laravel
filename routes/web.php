@@ -11,6 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'SelectionController@home');
+Route::resource('selections', 'SelectionController', [
+    'only' => ['create', 'update', 'destroy']
+  ]);
+
