@@ -15,6 +15,14 @@ class CreateSelectionsTable extends Migration
     {
         Schema::create('selections', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('company_id')->nullable(true);
+            $table->text('remarks')->nullable(true);
+            $table->string('documents_password')->nullable(true);
+            $table->date('next_appointment')    ->nullable(true);
+            $table->bigInteger('selection_status_id')->nullable(true);
+            $table->bigInteger('application_way_id') ->nullable(true);
+            $table->bigInteger('season_id')->nullable(true);
+
             $table->timestamps();
         });
     }
