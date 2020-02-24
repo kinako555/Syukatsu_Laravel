@@ -13,6 +13,11 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+
+Route::middleware(['cors'])->group(function () {
+    Route::options('accounts', function () {
+        return response()->json();
+    });
+
+    Route::post('accounts', 'AccountController@create');
 });

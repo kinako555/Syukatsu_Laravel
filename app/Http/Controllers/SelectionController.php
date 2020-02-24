@@ -16,7 +16,8 @@ class SelectionController extends Controller
 
     // GET root_path
     public function home() {
-        return response()->json(self::initialize_valiues());
+        return response()
+                ->json(self::initialize_valiues());
     }
 
     // POST /selections
