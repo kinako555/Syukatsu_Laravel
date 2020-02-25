@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 use App\ApplicationWay;
 use App\SelectionStatus;
@@ -42,6 +43,14 @@ class SelectionController extends Controller
         $selection->delete();
     }
 
+    // GET /selection?
+    public function search(Request $req) {
+        $selections = self::format_search_query_builder($req);
+        $rtn_args['selections'] = $selections->get();
+        return response()
+            ->json($rtn_args);
+    }
+
     # 初期表示データ
     private function initialize_valiues() {
         $rtn_args = array();
@@ -50,5 +59,25 @@ class SelectionController extends Controller
         $rtn_args['companys']  = Company::get();
         $rtn_args['close_ids'] = SelectionStatus::close_ids();
         return $rtn_args;
+    }
+
+    /*
+    URIクエリよりwhere条件を付与したクエリビルダを返す
+    何も指定されていない場合where条件なし
+    */
+    private function format_search_query_builder(Request $req) {
+        $company_name = $req->input('company_name', null);
+        $season_id    = $req->input('season_id', null);
+        $selections_query_builder = Selection::select('*');
+        if ($company_name) {
+            $selections_query_builder->whereIn('company_id', function($que) use ($company_name){
+                $que->select('id')
+                    ->from('companies')
+                    ->where('name', 'LIKE', "%{$company_name}%");
+            });
+        }
+        if ($season_id) $selections_query_builder->where('season_id', $season_id);
+        
+        return $selections_query_builder;
     }
 }

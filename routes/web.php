@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'SelectionController@home');
+Route::get('/selections', 'SelectionController@search');
 Route::resource('selections', 'SelectionController', [
     'only' => ['create', 'update', 'destroy']
   ]);
