@@ -42,6 +42,16 @@ class SelectionController extends Controller
         $selection->delete();
     }
 
+    // GET /selection?
+    public function search(Request $req) {
+        $company_name = $req->input('company_name');
+        $season_id    = $req->input('season_id');
+        echo $company_name;
+        echo $season_id;
+        $rtn_json = array();
+        return response()->json($rtn_json);
+    }
+
     # 初期表示データ
     private function initialize_valiues() {
         $rtn_args = array();
