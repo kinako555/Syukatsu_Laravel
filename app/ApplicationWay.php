@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ApplicationWay extends Model
 {
+    use Modelable;
     //
 }

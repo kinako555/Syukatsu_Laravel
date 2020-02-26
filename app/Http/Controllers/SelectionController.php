@@ -54,9 +54,9 @@ class SelectionController extends Controller
     # 初期表示データ
     private function initialize_valiues() {
         $rtn_args = array();
-        $rtn_args['selections'] = Selection::get();
+        $rtn_args[Selection::plural_name()] = Selection::get();
         $rtn_args = array_merge($rtn_args, Choicese::choicese_all());
-        $rtn_args['companys']  = Company::get();
+        $rtn_args[Company::plural_name()] = Company::get();
         $rtn_args['close_ids'] = SelectionStatus::close_ids();
         return $rtn_args;
     }
@@ -71,13 +71,12 @@ class SelectionController extends Controller
         $selections_query_builder = Selection::select('*');
         if ($company_name) {
             $selections_query_builder->whereIn('company_id', function($que) use ($company_name){
-                $que->select('id')
-                    ->from('companies')
+                $que->Company::select('id')
                     ->where('name', 'LIKE', "%{$company_name}%");
             });
         }
         if ($season_id) $selections_query_builder->where('season_id', $season_id);
-        
+
         return $selections_query_builder;
     }
 }

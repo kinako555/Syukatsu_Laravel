@@ -5,7 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Choicese;
 use App\ApplicationWay;
-use App\Http\Controllers\selection;
+use App\Selection;
 
 class test extends Command
 {
@@ -40,6 +40,6 @@ class test extends Command
      */
     public function handle()
     {
-        $a = new selection();
+        Choicese::choicese_all();
     }
 }

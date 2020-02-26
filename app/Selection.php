@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Selection extends Model
 {
-
+    use Modelable;
     
     # リレーション
     public function application_way() {
