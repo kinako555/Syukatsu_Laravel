@@ -6,6 +6,7 @@ use Illuminate\Console\Command;
 use App\Choicese;
 use App\ApplicationWay;
 use App\Selection;
+use App\Company;
 
 class test extends Command
 {
@@ -40,6 +41,6 @@ class test extends Command
      */
     public function handle()
     {
-        Choicese::choicese_all();
+        Company::created_id(["name" => "test"]);
     }
 }

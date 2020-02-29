@@ -16,4 +16,7 @@ Route::get('/selections', 'SelectionController@search');
 Route::resource('selections', 'SelectionController', [
     'only' => ['create', 'update', 'destroy']
   ]);
-
+Route::resource('/companies', 'CompanyController', [
+  'only' => 'create'
+]);
+Route::post('/companies', 'CompanyController@create');

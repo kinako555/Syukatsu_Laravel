@@ -23,11 +23,18 @@ class SelectionController extends Controller
 
     // POST /selections
     public function create(Request $req) {
-        $selection = Selection::new($req);
-        $selection::set_choicese($req);
-        $rtn_json;
-        if ($selection.save) {
-            return response()->json($rtn_json);
+        $selection = $req->selection;
+        $req_application_way = $req->application_way;
+        $req_application_way = $req->company;
+        $req_application_way = $req->season;
+        $req_application_way = $req->selection_status;
+        if (is_created($req->application_way)) $selection->application_way_id = ApplicationWay::create('name', $req->application_way['name'])->id;
+        if (is_created($req->company)) $selection->company_id = Company::create('name', $req->company['name'])->id;
+        if (is_created($req->season))  $selection->season_id  = Season::create('name' , $req->season['name']) ->id;
+        if (is_created($req->selection_status)) $selection->selection_status_id = selectionStatus::create('name', $req->selection_status['name'])->id;
+
+        if (Selection::save($selection)) {
+            return response()->json();
         }
         return response()->json($rtn_json);
     }
@@ -43,7 +50,7 @@ class SelectionController extends Controller
         $selection->delete();
     }
 
-    // GET /selection?
+    // GET /selections?
     public function search(Request $req) {
         $selections = self::format_search_query_builder($req);
         $rtn_args['selections'] = $selections->get();
@@ -66,17 +73,20 @@ class SelectionController extends Controller
     何も指定されていない場合where条件なし
     */
     private function format_search_query_builder(Request $req) {
-        $company_name = $req->input('company_name', null);
-        $season_id    = $req->input('season_id', null);
+        $company_name = $req->query('company_name', null);
+        $season_id    = $req->query('season_id', null);
         $selections_query_builder = Selection::select('*');
         if ($company_name) {
             $selections_query_builder->whereIn('company_id', function($que) use ($company_name){
-                $que->Company::select('id')
-                    ->where('name', 'LIKE', "%{$company_name}%");
+                $que->Company::select('id')->where('name', 'LIKE', "%{$company_name}%");
             });
         }
         if ($season_id) $selections_query_builder->where('season_id', $season_id);
 
         return $selections_query_builder;
+    }
+
+    private function is_created($req_value) {
+        return req_value.created;
     }
 }

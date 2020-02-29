@@ -23,9 +23,7 @@ class Choicese
     public static function choicese_all() {
         $choicese = self::choice_objects();
         $rtn_args = array();
-        foreach ($choicese as $choice) {
-            $rtn_args[$choice::plural_name()] = $choice->get();
-        }
+        foreach ($choicese as $choice) { $rtn_args[$choice::plural_name()] = $choice->get(); }
         return $rtn_args;
     }
 }
