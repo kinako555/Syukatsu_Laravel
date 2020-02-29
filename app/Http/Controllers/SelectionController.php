@@ -24,18 +24,7 @@ class SelectionController extends Controller
     // POST /selections
     public function create(Request $req) {
         $selection = $req->selection;
-        $req_application_way = $req->application_way;
-        $req_application_way = $req->company;
-        $req_application_way = $req->season;
-        $req_application_way = $req->selection_status;
-        if (is_created($req->application_way)) $selection->application_way_id = ApplicationWay::create('name', $req->application_way['name'])->id;
-        if (is_created($req->company)) $selection->company_id = Company::create('name', $req->company['name'])->id;
-        if (is_created($req->season))  $selection->season_id  = Season::create('name' , $req->season['name']) ->id;
-        if (is_created($req->selection_status)) $selection->selection_status_id = selectionStatus::create('name', $req->selection_status['name'])->id;
-
-        if (Selection::save($selection)) {
-            return response()->json();
-        }
+        if (Selection::save($selection)) return response()->json();
         return response()->json($rtn_json);
     }
 
