@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class SelectionStatus extends Model
 {
     use Modelable;
+
+    protected $guarded = ['id'];
     
     # 選考終了項目IDすべてを取得する
     public static function close_ids() {

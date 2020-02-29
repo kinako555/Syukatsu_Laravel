@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Selection extends Model
 {
     use Modelable;
+
+    protected $guarded = ['id'];
     
     # リレーション
     public function application_way() {
