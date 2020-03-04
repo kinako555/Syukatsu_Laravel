@@ -30,12 +30,19 @@ class SelectionController extends Controller
 
     // PATCH/PUT /selections/1
     public function update(Request $req) {
-
+        $selection = Selection::find($id);
+        $selection->update($req->selection);
     }
 
     // DELETE /selections/1
+    /*
+    削除するselectionに登録されているcompanyが1つのselectionにしか登録されていない場合は削除する
+    */
     public function destroy(int $id) {
         $selection = Selection::find($id);
+        if (Company::find($selection->company_id)->exists()){
+            if ($selection->company->selections->count() <= 1) $selection->company->delete();
+        }
         $selection->delete();
     }
 

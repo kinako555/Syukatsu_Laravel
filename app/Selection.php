@@ -12,15 +12,15 @@ class Selection extends Model
     
     # リレーション
     public function application_way() {
-        return $this->hasOne('App\ApplicationWay');
+        return $this->belongsTo('App\ApplicationWay');
     }
     public function season() {
-        return $this->hasOne('App\Season');
+        return $this->belongsTo('App\Season');
     }
     public function company() {
-        return $this->hasOne('App\Company');
+        return $this->belongsTo('App\Company');
     }
     public function selection_status() {
-        return $this->hasOne('App\SelectionStatus');
+        return $this->belongsTo('App\SelectionStatus');
     }
 }
