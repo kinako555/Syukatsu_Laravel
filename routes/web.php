@@ -13,9 +13,13 @@
 
 Route::get('/', 'SelectionController@home');
 Route::get('/selections', 'SelectionController@search');
+Route::delete('/selections/{id}', 'SelectionController@destroy');
+Route::options('/selections/{id}', function(){ return 'success'; });
+/*
 Route::resource('selections', 'SelectionController', [
     'only' => ['create', 'update', 'destroy']
   ]);
+*/
 Route::resource('/companies', 'CompanyController', [
   'only' => 'create'
 ]);

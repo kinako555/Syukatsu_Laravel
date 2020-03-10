@@ -39,11 +39,13 @@ class SelectionController extends Controller
     削除するselectionに登録されているcompanyが1つのselectionにしか登録されていない場合は削除する
     */
     public function destroy(int $id) {
-        $selection = Selection::find($id);
-        if (Company::find($selection->company_id)->exists()){
+        $selection = Selection::findOrFail($id);
+        if (Company::where('id', $selection->company_id)->exists()){
             if ($selection->company->selections->count() <= 1) $selection->company->delete();
         }
+        $data["status"] = "a";
         $selection->delete();
+        return response()->json();
     }
 
     // GET /selections?
@@ -74,10 +76,10 @@ class SelectionController extends Controller
         $selections_query_builder = Selection::select('*');
         if ($company_name) {
             $selections_query_builder->whereIn('company_id', function($que) use ($company_name){
-                $que->Company::select('id')->where('name', 'LIKE', "%{$company_name}%");
+                $que->select('id')->where('name', 'LIKE', "%{$company_name}%")->from('companies');
             });
         }
-        if ($season_id) $selections_query_builder->where('season_id', $season_id);
+        if ($season_id != "undefined") $selections_query_builder->where('season_id', $season_id);
 
         return $selections_query_builder;
     }
