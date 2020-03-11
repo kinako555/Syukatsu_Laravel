@@ -11,8 +11,6 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    
-
     protected function format_create_return_arg($id) {
         $rtn_ars['id'] = $id;
         return $rtn_ars;

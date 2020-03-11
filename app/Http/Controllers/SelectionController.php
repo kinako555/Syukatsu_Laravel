@@ -23,9 +23,12 @@ class SelectionController extends Controller
 
     // POST /selections
     public function create(Request $req) {
-        $selection = $req->selection;
-        if (Selection::save($selection)) return response()->json();
-        return response()->json($rtn_json);
+        $selection_param = $req->input('selection');
+        $id = Selection::created_id($selection_param);      
+        if ($id) {
+            $rtn_ars = self::format_create_return_arg($id);
+            return response()->json($rtn_ars);
+        }
     }
 
     // PATCH/PUT /selections/1
@@ -43,7 +46,6 @@ class SelectionController extends Controller
         if (Company::where('id', $selection->company_id)->exists()){
             if ($selection->company->selections->count() <= 1) $selection->company->delete();
         }
-        $data["status"] = "a";
         $selection->delete();
         return response()->json();
     }

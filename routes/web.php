@@ -14,13 +14,18 @@
 Route::get('/', 'SelectionController@home');
 Route::get('/selections', 'SelectionController@search');
 Route::delete('/selections/{id}', 'SelectionController@destroy');
+Route::post('/selection', 'SelectionController@create');
 Route::options('/selections/{id}', function(){ return 'success'; });
+Route::options('/selection', function(){ return 'success'; });
 /*
 Route::resource('selections', 'SelectionController', [
     'only' => ['create', 'update', 'destroy']
   ]);
 */
+/*
 Route::resource('/companies', 'CompanyController', [
   'only' => 'create'
 ]);
-Route::post('/companies', 'CompanyController@create');
+*/
+Route::post('/company', 'CompanyController@create');
+Route::options('/company', function(){ return 'success'; });
