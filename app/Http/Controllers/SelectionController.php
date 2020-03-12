@@ -24,9 +24,9 @@ class SelectionController extends Controller
     // POST /selections
     public function create(Request $req) {
         $selection_param = $req->input('selection');
-        $id = Selection::created_id($selection_param);      
-        if ($id) {
-            $rtn_ars = self::format_create_return_arg($id);
+        $selection = Selection::create($selection_param);      
+        if ($selection) {
+            $rtn_ars = ['selection' => $selection];
             return response()->json($rtn_ars);
         }
     }

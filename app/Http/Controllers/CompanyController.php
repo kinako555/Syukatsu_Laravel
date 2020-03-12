@@ -13,9 +13,9 @@ class CompanyController extends Controller
         $company_param = $req->input('company');
 
         // 成功
-        $id = Company::created_id($company_param);
-        if ($id) {
-            $rtn_ars = self::format_create_return_arg($id);
+        $company = Company::create($company_param);
+        if ($company) {
+            $rtn_ars = ['company' => $company];
             return response()->json($rtn_ars);
         }
         // 失敗
