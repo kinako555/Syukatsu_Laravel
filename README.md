@@ -1,7 +1,6 @@
 # ReadMe
 暇なので自分で使うようの就活管理サイトを作っています。  
-ある程度できたらポートフォリオとしてAWSに上げたいと思っています。   
-Railsで作っていましたが、Laravel勉強したのでLaravelに移行しています。
+実用的にはならなさそうなので言語の勉強用になりそうです。
 フロントサイドはSyukatsuManagementCLIリポジトリで作業しています。
 
 ## どんなサイトか
@@ -11,11 +10,11 @@ Railsで作っていましたが、Laravel勉強したのでLaravelに移行し�
 
 ## 使用技術
 Laravel
-Angular  
+Angular6
 MySql
 
 ## 進捗
-簡単なCRUDのCRDの部分が完成 
+簡単なCRUD処理完了
 
 ## 備考
 LaravelはAPIとして使っていますが、デフォルトで作成したので、ViewやらHelperなどが存在しています。    

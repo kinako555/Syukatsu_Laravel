@@ -23,9 +23,11 @@ class CompanyController extends Controller
     }
 
     // PATCH/PUT /companies/1
-    public function update(Request $req) {
-        $company = Company::find($id);
+    public function update(Request $req, int $id) {
+        $company = Company::findOrFail($id);
         $company->update($req->company);
+
+        return response()->json($company);
     }
     
 }

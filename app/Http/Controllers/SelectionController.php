@@ -32,9 +32,10 @@ class SelectionController extends Controller
     }
 
     // PATCH/PUT /selections/1
-    public function update(Request $req) {
-        $selection = Selection::find($id);
-        $selection->update($req->selection);
+    public function update(Request $req, int $id) {
+        $selection = Selection::findOrFail($id);
+        $selection->update($req->input('selection'));
+        return response()->json($selection);
     }
 
     // DELETE /selections/1
