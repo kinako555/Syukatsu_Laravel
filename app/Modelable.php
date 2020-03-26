@@ -21,16 +21,4 @@ trait Modelable
         return $rtn_name;
     }
 
-    /*
-    insertしてidを返す
-    失敗した場合はfalse
-    */
-    public static function created_id($value){
-        try {
-            return self::create($value)->id;
-        } catch (Exception $e) {
-            return false;
-        }
-    }
-
 }

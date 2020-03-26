@@ -41,6 +41,6 @@ class test extends Command
      */
     public function handle()
     {
-        Company::created_id(["name" => "test"]);
+        
     }
 }

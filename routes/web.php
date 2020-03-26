@@ -15,8 +15,8 @@ Route::get('/', 'SelectionController@home');
 Route::get('/selections', 'SelectionController@search');
 Route::delete('/selections/{id}', 'SelectionController@destroy');
 Route::post('/selection', 'SelectionController@create');
-Route::patch('/selection/{id}', 'SelectionController@update');
-Route::options('/selection/{id}', function(){ return 'success'; });
+Route::patch('/selections/{id}', 'SelectionController@update');
+Route::options('/selections/{id}', function(){ return 'success'; });
 Route::options('/selection', function(){ return 'success'; });
 /*
 Route::resource('selections', 'SelectionController', [
@@ -29,6 +29,6 @@ Route::resource('/companies', 'CompanyController', [
 ]);
 */
 Route::post('/company', 'CompanyController@create');
-Route::patch('/company/{id}', 'CompanyController@update');
+Route::patch('/companies/{id}', 'CompanyController@update');
 Route::options('/company', function(){ return 'success'; });
-Route::options('/company/{id}', function(){ return 'success'; });
+Route::options('/companies/{id}', function(){ return 'success'; });
