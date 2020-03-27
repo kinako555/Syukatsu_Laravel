@@ -32,3 +32,4 @@ Route::post('/company', 'CompanyController@create');
 Route::patch('/companies/{id}', 'CompanyController@update');
 Route::options('/company', function(){ return 'success'; });
 Route::options('/companies/{id}', function(){ return 'success'; });
+

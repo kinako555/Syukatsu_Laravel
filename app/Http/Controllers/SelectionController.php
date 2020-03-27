@@ -11,6 +11,7 @@ use App\Season;
 use App\Selection;
 use App\Company;
 use App\Choicese;
+use App\Http\Requests\SelectionForm;
 
 class SelectionController extends Controller
 {
@@ -22,9 +23,9 @@ class SelectionController extends Controller
     }
 
     // POST /selections
-    public function create(Request $req) {
-        $selection_param = $req->input('selection');
-        $selection = Selection::create($selection_param);      
+    public function create(SelectionForm $req) {
+        $validated = $req->validated();
+        $selection = Selection::create($validated['selection']);      
         if ($selection) {
             $rtn_ars = ['selection' => $selection];
             return response()->json($rtn_ars);

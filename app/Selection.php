@@ -23,4 +23,5 @@ class Selection extends Model
     public function selection_status() {
         return $this->belongsTo('App\SelectionStatus');
     }
+
 }
