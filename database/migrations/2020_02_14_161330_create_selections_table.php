@@ -19,9 +19,9 @@ class CreateSelectionsTable extends Migration
             $table->text('remarks')->nullable(true);
             $table->string('documents_password')->nullable(true);
             $table->date('next_appointment')    ->nullable(true);
-            $table->bigInteger('selection_status_id')->nullable(true)->default(0);
-            $table->bigInteger('application_way_id') ->nullable(true)->default(0);
-            $table->bigInteger('season_id')->nullable(true)->default(0);
+            $table->bigInteger('selection_status_id')->nullable(true)->default(1);
+            $table->bigInteger('application_way_id') ->nullable(true)->default(1);
+            $table->bigInteger('season_id')->nullable(true)->default(1);
 
             $table->timestamps();
         });

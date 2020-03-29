@@ -18,7 +18,7 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
-        create_undefined_choicese();
+        self::create_undefined_choicese();
         SelectionStatus::create(['name'=> "☓", 'active'=> false]);
         $decline     = SelectionStatus::create(['name'=> "☓(辞退)", 'active'=> false]);
         $wait_result = SelectionStatus::create(['name'=> "結果待ち"]);
@@ -51,8 +51,8 @@ class TableSeeder extends Seeder
     }
 
     private function create_undefined_choicese() {
-        foreach (Choicese::choice_objects as $choice) {
-            $choice->create(['id' => 0, 'name'=> "未選択"]);
+        foreach (Choicese::choice_objects() as $choice) {
+            $choice->create(['id' => 1, 'name'=> "未選択"]);
         }
     }
 }

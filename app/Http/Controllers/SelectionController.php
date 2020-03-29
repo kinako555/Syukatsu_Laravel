@@ -84,7 +84,7 @@ class SelectionController extends Controller
                 $que->select('id')->where('name', 'LIKE', "%{$company_name}%")->from('companies');
             });
         }
-        if ($season_id != "undefined") $selections_query_builder->where('season_id', $season_id);
+        if ($season_id) $selections_query_builder->where('season_id', $season_id);
 
         return $selections_query_builder;
     }
