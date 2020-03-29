@@ -7,6 +7,7 @@ use App\SelectionStatus;
 use App\Season;
 use App\Selection;
 use App\Company;
+use App\Choicese;
 
 class TableSeeder extends Seeder
 {
@@ -17,6 +18,7 @@ class TableSeeder extends Seeder
      */
     public function run()
     {
+        create_undefined_choicese();
         SelectionStatus::create(['name'=> "☓", 'active'=> false]);
         $decline     = SelectionStatus::create(['name'=> "☓(辞退)", 'active'=> false]);
         $wait_result = SelectionStatus::create(['name'=> "結果待ち"]);
@@ -46,5 +48,11 @@ class TableSeeder extends Seeder
                            'selection_status_id'=>   $wait_result->id, 
                            'application_way_id'=>    $green->id, 
                            'season_id'=> $season->id]);
+    }
+
+    private function create_undefined_choicese() {
+        foreach (Choicese::choice_objects as $choice) {
+            $choice->create(['id' => 0, 'name'=> "未選択"]);
+        }
     }
 }

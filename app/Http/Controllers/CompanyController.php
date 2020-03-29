@@ -10,9 +10,9 @@ use App\Http\Requests\CompanyForm;
 class CompanyController extends Controller
 {
     // POST /companies
-    public function create(CompanyForm $req) {
+    public function store(CompanyForm $req) {
         //$company_param = $req->input('company');
-        $validated = $req->validated();;
+        $validated = $req->validated();
         // 成功
         $company = Company::create($validated['company']);
         if ($company) {
@@ -24,9 +24,10 @@ class CompanyController extends Controller
     }
 
     // PATCH/PUT /companies/1
-    public function update(Request $req, int $id) {
+    public function update(CompanyForm $req, int $id) {
         $company = Company::findOrFail($id);
-        $company->update($req->company);
+        $validated = $req->validated();
+        $company->update($validated['company']);
 
         return response()->json($company);
     }

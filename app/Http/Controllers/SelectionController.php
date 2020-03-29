@@ -23,7 +23,7 @@ class SelectionController extends Controller
     }
 
     // POST /selections
-    public function create(SelectionForm $req) {
+    public function store(SelectionForm $req) {
         $validated = $req->validated();
         $selection = Selection::create($validated['selection']);      
         if ($selection) {
